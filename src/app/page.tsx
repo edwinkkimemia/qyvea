@@ -7,6 +7,7 @@ import { prisma } from "@/lib/db";
 import { ProductCard } from "@/components/product-card";
 import { IMAGES } from "@/lib/images";
 import { MOCK_PRODUCTS } from "@/lib/mock-products";
+import { ModernHeroSection } from "@/components/modern-hero-section";
 import { Phone, ShieldCheck, Clock, Award, ArrowRight, Building2, Home, Hotel, Landmark, GraduationCap, Stethoscope } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -35,7 +36,10 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero — Syntech dark with red accent */}
+      {/* Modern 3-Column Hero — center slideshow + side promos */}
+      <ModernHeroSection products={displayProducts as any} />
+
+      {/* Hero — Syntech dark with red accent (pushed below modern hero) */}
       <section className="relative overflow-hidden bg-[#002070] text-white">
         {/* Unsplash tech background */}
         <div className="absolute inset-0">
