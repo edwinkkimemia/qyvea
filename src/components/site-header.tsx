@@ -2,8 +2,8 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { useSession, signOut } from "next-auth/react";
-import { ShoppingCart, Heart, Menu, X, Phone, Search, User, LogOut, ChevronDown } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { ShoppingCart, Heart, Menu, X, Phone, Search, User, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SITE, SERVICES } from "@/lib/constants";
@@ -48,20 +48,26 @@ export function SiteHeader() {
   return (
     <>
     <header className="sticky top-0 z-50 w-full bg-white border-b border-zinc-200 dark:bg-zinc-950 dark:border-zinc-800">
-      {/* Top bar */}
-      <div className="bg-[#002070] text-white text-xs border-b-2 border-[#F00000]">
-        <div className="container mx-auto flex h-7 items-center justify-between px-4">
-          <div className="hidden md:flex gap-3 overflow-hidden whitespace-nowrap">
+      {/* Top bar — Get Quote + Sign In red buttons, font size returned to previous (12px) */}
+      <div className="bg-[#002070] text-white text-[12px] border-b-2 border-[#F00000]">
+        <div className="container mx-auto flex h-7 items-center justify-between px-4 gap-2">
+          <div className="hidden lg:flex gap-3 overflow-hidden whitespace-nowrap">
             <span>CCTV Installation • Biometric Access • Solar • Electric Fencing • IT Support • Automatic Gates • Fire Alarm • Electrical • Smart Home • 24/7 Emergency</span>
           </div>
-          <div className="flex items-center gap-3 ml-auto">
-            <Link href={`tel:${SITE.phone}`} className="flex items-center gap-1 hover:text-[#0038A0] transition"><Phone className="h-3 w-3" />{SITE.phone}</Link>
-            <Link href={`https://wa.me/${SITE.whatsapp}`} target="_blank" className="bg-[#25D366] hover:bg-[#20BD5A] text-white px-2.5 py-0.5 rounded-full font-bold text-xs transition hidden sm:flex items-center gap-1">
+          <div className="flex items-center gap-2 ml-auto">
+            <Link href={`tel:${SITE.phone}`} className="hidden sm:flex items-center gap-1 hover:text-white/80 transition whitespace-nowrap"><Phone className="h-3 w-3" />{SITE.phone}</Link>
+            <Link href={`https://wa.me/${SITE.whatsapp}`} target="_blank" className="bg-[#25D366] hover:bg-[#20BD5A] text-white px-2.5 py-1 rounded-full font-bold text-[12px] transition hidden md:flex items-center gap-1">
               <svg viewBox="0 0 32 32" className="h-3 w-3 fill-white"><path d="M16.04 2C8.43 2 2.22 8.21 2.22 15.83c0 2.44.64 4.81 1.85 6.9L2.08 30l7.48-1.97a13.76 13.76 0 0 0 6.48 1.64h.01c7.61 0 13.82-6.21 13.82-13.83 0-3.7-1.44-7.17-4.05-9.78A13.75 13.75 0 0 0 16.04 2Zm7.93 19.8c-.33.95-1.95 1.84-2.71 1.96-.68.1-1.36.1-2.2-.1-.58-.14-1.33-.33-2.28-.65-4.02-1.72-6.64-5.74-6.84-6-.2-.27-1.66-2.21-1.66-4.22s1.05-3 1.43-3.41c.33-.36.87-.52 1.39-.52h1c.37 0 .69.02.99.83.33.95 1.14 3.28 1.24 3.52.1.24.16.52.02.83-.14.31-.21.5-.42.77-.2.27-.43.57-.61.77-.2.22-.41.46-.18.9.23.44 1.04 1.72 2.23 2.79 1.53 1.36 2.82 1.78 3.22 1.98.31.15.5.13.68-.08.19-.2.79-.92 1-1.22.21-.31.42-.26.71-.16.29.1 1.83.87 2.15 1.02.31.16.52.24.6.37.08.13.08.76-.25 1.71Z"/></svg>
               WhatsApp
             </Link>
-            {/* Mobile: quote button on right side of top bar */}
-            <Link href="/quote" className="sm:hidden bg-[#F00000] hover:bg-[#CC0000] text-white px-2 py-0.5 rounded-full font-bold text-[10px] transition">Quote</Link>
+            <Link href="/quote" className="bg-[#F00000] hover:bg-[#CC0000] text-white px-3 py-1 rounded-full font-bold text-[12px] transition whitespace-nowrap">Get Quote</Link>
+            {session?.user ? (
+              <Link href="/dashboard" className="bg-[#F00000] hover:bg-[#CC0000] text-white px-3 py-1 rounded-full font-bold text-[12px] transition whitespace-nowrap hidden sm:inline-flex items-center gap-1">
+                <User className="h-3 w-3" /> Dashboard
+              </Link>
+            ) : (
+              <Link href="/login" className="bg-[#F00000] hover:bg-[#CC0000] text-white px-3 py-1 rounded-full font-bold text-[12px] transition whitespace-nowrap">Sign In</Link>
+            )}
           </div>
         </div>
       </div>
@@ -74,8 +80,8 @@ export function SiteHeader() {
               <img src="/syntechlogo.jpg" alt="Syntech Solutions" className="h-10 md:h-12 w-auto max-w-[160px] object-contain rounded-md" loading="eager" />
             </Link>
 
-            {/* Desktop nav links */}
-            <nav className="hidden lg:flex items-center gap-0.5 text-sm font-medium">
+            {/* Desktop nav links — text color only, no bg */}
+            <nav className="hidden lg:flex items-center gap-1 text-sm font-medium">
               {[
                 { label: "Security", filter: "Security" },
                 { label: "Power & Solar", filter: "Power & Solar" },
@@ -83,7 +89,7 @@ export function SiteHeader() {
                 { label: "Digital & Creative", filter: "Digital & Creative" },
               ].map(({ label, filter }) => (
                 <div key={filter} className="relative group">
-                  <button className={`px-2.5 py-1.5 rounded-lg transition flex items-center gap-1 font-medium ${SERVICES.filter(s=>s.cat===filter).some(s=>isActive(s.href)) ? "bg-[#0038A0] text-white" : "hover:bg-[#F5F7FA] hover:text-[#0038A0]"}`}>{label} <span className="text-[10px] opacity-60 group-hover:rotate-180 transition-transform">▾</span></button>
+                  <button className={`px-2.5 py-1.5 rounded-lg transition flex items-center gap-1 font-medium ${SERVICES.filter(s=>s.cat===filter).some(s=>isActive(s.href)) ? "text-[#0038A0] font-bold" : "text-zinc-700 hover:text-[#0038A0]"}`}>{label} <span className="text-[10px] opacity-60 group-hover:rotate-180 transition-transform">▾</span></button>
                   <div className="absolute left-0 top-full hidden group-hover:block group-focus-within:block bg-white border-2 border-[#0038A0]/10 rounded-xl shadow-xl w-64 mt-2 z-50 overflow-hidden">
                     <div className="p-2 space-y-1">
                       {SERVICES.filter(s=>s.cat===filter).map(s=><Link key={s.slug} href={s.href} className="block px-3 py-2 rounded-lg hover:bg-[#F5F7FA] hover:text-[#002070] text-sm">{s.title}</Link>)}
@@ -92,9 +98,9 @@ export function SiteHeader() {
                   </div>
                 </div>
               ))}
-              {/* ICT PRODUCTS */}
+              {/* ICT PRODUCTS — text only */}
               <div className="relative group">
-                <button className={`px-2.5 py-1.5 rounded-lg transition flex items-center gap-1 font-medium ${isActive("/shop?category=ICT") ? "bg-[#0038A0] text-white" : "hover:bg-[#F5F7FA] hover:text-[#0038A0]"}`}>ICT <span className="text-[10px] opacity-60 group-hover:rotate-180 transition-transform">▾</span></button>
+                <button className={`px-2.5 py-1.5 rounded-lg transition flex items-center gap-1 font-medium ${isActive("/shop?category=ICT") ? "text-[#0038A0] font-bold" : "text-zinc-700 hover:text-[#0038A0]"}`}>ICT <span className="text-[10px] opacity-60 group-hover:rotate-180 transition-transform">▾</span></button>
                 <div className="absolute left-0 top-full hidden group-hover:block group-focus-within:block bg-white border-2 border-[#0038A0]/10 rounded-xl shadow-xl w-52 mt-2 z-50 overflow-hidden">
                   <div className="p-2 space-y-1">
                     <Link href="/shop?category=ICT" className="block px-3 py-2 rounded-lg hover:bg-[#F5F7FA] hover:text-[#002070] text-sm font-semibold">All ICT Products</Link>
@@ -105,12 +111,12 @@ export function SiteHeader() {
                   </div>
                 </div>
               </div>
-              <Link href="/shop" className={`px-2.5 py-1.5 rounded-lg transition font-medium ${isActive("/shop") ? "bg-[#0038A0] text-white" : "hover:bg-[#F5F7FA] hover:text-[#0038A0]"}`}>Shop</Link>
-              <Link href="/blog" className={`px-2.5 py-1.5 rounded-lg transition ${isActive("/blog") ? "bg-[#0038A0] text-white" : "hover:bg-[#F5F7FA] hover:text-[#0038A0]"}`}>Blog</Link>
+              <Link href="/shop" className={`px-2.5 py-1.5 rounded-lg transition font-medium ${isActive("/shop") ? "text-[#0038A0] font-bold" : "text-zinc-700 hover:text-[#0038A0]"}`}>Shop</Link>
+              <Link href="/blog" className={`px-2.5 py-1.5 rounded-lg transition ${isActive("/blog") ? "text-[#0038A0] font-bold" : "text-zinc-700 hover:text-[#0038A0]"}`}>Blog</Link>
             </nav>
 
-            {/* Right side — search, wishlist, cart, auth, quote */}
-            <div className="flex items-center gap-0.5">
+            {/* Right side — search, wishlist, cart (with Cart word), hamburger — Get Quote/Sign In moved to top bar */}
+            <div className="flex items-center gap-1">
               {/* Search toggle */}
               <Button variant="ghost" size="icon" className="hover:text-[#0038A0] h-9 w-9" onClick={() => setSearchOpen(!searchOpen)}>
                 <Search className="h-4 w-4" />
@@ -122,25 +128,14 @@ export function SiteHeader() {
                   {wishlist.length > 0 && <span className="absolute -top-0.5 -right-0.5 bg-[#0038A0] text-white text-[8px] font-bold rounded-full h-3.5 w-3.5 grid place-items-center">{wishlist.length}</span>}
                 </Button>
               </Link>
-              {/* Cart */}
-              <Link href="/cart"><Button variant="ghost" size="icon" className="relative hover:text-[#0038A0] h-9 w-9">
-                <ShoppingCart className="h-4 w-4" />
-                {cartCount > 0 && <span className="absolute -top-0.5 -right-0.5 bg-[#F00000] text-white text-[8px] font-bold rounded-full h-3.5 w-3.5 grid place-items-center">{cartCount}</span>}
-              </Button></Link>
-              {/* Quote button — desktop */}
-              <Link href="/quote" className="hidden sm:inline-flex"><Button size="sm" className="hidden lg:inline-flex h-8 text-xs">Get Quote</Button></Link>
-              {/* Auth */}
-              {session?.user ? (
-                <>
-                  {(session.user as any).role === "ADMIN" ? (
-                    <Link href="/admin" className="hidden lg:inline-flex"><Button variant="secondary" size="sm" className="bg-[#002070] text-white hover:bg-black h-8 text-xs"><User className="h-3 w-3" /> Admin</Button></Link>
-                  ) : null}
-                  <Link href="/dashboard" className="hidden lg:inline-flex"><Button variant={(session.user as any).role === "ADMIN" ? "ghost" : "secondary"} size="sm" className="h-8 text-xs gap-1"><User className="h-3 w-3" /> {(session.user as any).role === "ADMIN" ? "Dashboard" : (session.user as any).email?.split("@")[0]}</Button></Link>
-                  <Button variant="ghost" size="sm" className="hidden lg:inline-flex h-8 text-xs" onClick={() => signOut({ callbackUrl: "/" })}><LogOut className="h-3 w-3" /></Button>
-                </>
-              ) : (
-                <Link href="/login" className="hidden lg:inline-flex"><Button variant="secondary" size="sm" className="h-8 text-xs"><User className="h-3 w-3" /> Sign In</Button></Link>
-              )}
+              {/* Cart — bg blue, hover red, with word Cart next to icon */}
+              <Link href="/cart" className="relative flex items-center gap-1.5 bg-[#0038A0] hover:bg-[#F00000] text-white px-3.5 py-1.5 rounded-full transition font-bold shadow-sm">
+                <span className="relative">
+                  <ShoppingCart className="h-4 w-4" />
+                  {cartCount > 0 && <span className="absolute -top-2 -right-2 bg-white text-[#F00000] text-[8px] font-black rounded-full h-4 w-4 grid place-items-center border-2 border-[#0038A0] group-hover:border-[#F00000]">{cartCount}</span>}
+                </span>
+                <span className="text-sm font-bold hidden sm:inline">Cart</span>
+              </Link>
               {/* Hamburger */}
               <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9" onClick={() => setMobileOpen(!mobileOpen)}>{mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</Button>
             </div>
@@ -233,18 +228,10 @@ export function SiteHeader() {
 
               <Link href="/blog" onClick={() => setMobileOpen(false)} className="block py-2 text-sm font-medium">Blog</Link>
 
-              <div className="border-t pt-3 mt-2 space-y-2">
-                <Link href="/quote" onClick={() => setMobileOpen(false)} className="block"><Button className="w-full bg-[#F00000] hover:bg-[#CC0000]">Get Free Quote</Button></Link>
-                {session?.user ? (
-                  <>
-                    <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="block py-2 text-sm font-semibold text-[#0038A0]">My Dashboard</Link>
-                    {(session.user as any).role === "ADMIN" && <Link href="/admin" onClick={() => setMobileOpen(false)} className="block py-2 text-sm font-semibold text-[#F00000]">Admin Panel</Link>}
-                    <button onClick={() => { setMobileOpen(false); signOut({ callbackUrl: "/" }); }} className="block py-2 text-left text-sm w-full">Sign Out ({(session.user as any).email})</button>
-                  </>
-                ) : (
-                  <Link href="/login" onClick={() => setMobileOpen(false)} className="block py-2 text-sm font-semibold">Sign In</Link>
-                )}
-              </div>
+              {/* Get Quote / Sign In moved to top bar (red buttons) — removed from mobile drawer per request */}
+              {session?.user && (session.user as any).role === "ADMIN" && (
+                <Link href="/admin" onClick={() => setMobileOpen(false)} className="block py-2 text-sm font-semibold text-[#F00000] border-t pt-3 mt-2">Admin Panel</Link>
+              )}
             </div>
           </div>
         </>

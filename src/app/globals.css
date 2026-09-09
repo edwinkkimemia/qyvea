@@ -50,9 +50,9 @@
 }
 
 @layer base {
-  html { @apply scroll-smooth; }
+  html { @apply scroll-smooth; font-size: 17.5px; }
   * { @apply border-border; }
-  body { @apply bg-background text-foreground antialiased overflow-x-hidden; }
+  body { @apply bg-background text-foreground antialiased overflow-x-hidden text-[15.5px] md:text-[16.5px] leading-relaxed; }
   img, video { @apply max-w-full h-auto; }
   *:focus-visible { @apply outline-none ring-2 ring-primary ring-offset-2; }
 }
