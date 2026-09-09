@@ -7,7 +7,8 @@ import { IMAGES } from "@/lib/images";
 import { prisma } from "@/lib/db";
 import { ProductCard } from "@/components/product-card";
 import Link from "next/link";
-import { CheckCircle2, Clock, Shield, Star, Quote } from "lucide-react";
+import { CheckCircle2, Clock, Shield, Star, Quote, ExternalLink, Globe } from "lucide-react";
+import { ProofImage } from "@/components/proof-image";
 
 type ServiceData = {
   title: string;
@@ -536,6 +537,99 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </CardContent>
       </Card>
+
+      {/* Proof of Work — only for Website Design */}
+      {slug === "website-design" && (
+        <Card className="mt-6 overflow-hidden border-2 border-[#0038A0]/15">
+          <div className="h-1 bg-[#0038A0]" />
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <div className="h-9 w-9 rounded-xl bg-[#0038A0] text-white grid place-items-center"><Globe className="h-5 w-5" /></div>
+              <div>
+                <CardTitle className="leading-tight">Proof of Work — Live Websites We Built</CardTitle>
+                <p className="text-sm text-zinc-500">Real projects • Fast, SEO-ready, M-Pesa integrated • Click to visit live site</p>
+              </div>
+              <Badge className="ml-auto hidden sm:inline-flex bg-emerald-500 text-white border-0 rounded-full">4 Live Sites</Badge>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {[
+                {
+                  domain: "kimsafety.co.ke",
+                  name: "Kim Safety",
+                  desc: "Safety equipment & PPE e-commerce",
+                  tags: "E-commerce • M-Pesa",
+                  shot: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fkimsafety.co.ke?w=800",
+                  fallback: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80",
+                },
+                {
+                  domain: "dynatecltd.com",
+                  name: "Dynatec Ltd",
+                  desc: "Engineering & technical solutions",
+                  tags: "Corporate • CMS",
+                  shot: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fdynatecltd.com?w=800",
+                  fallback: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+                },
+                {
+                  domain: "safetypro.co.ke",
+                  name: "Safety Pro",
+                  desc: "Industrial safety & compliance",
+                  tags: "Catalog • SEO",
+                  shot: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fsafetypro.co.ke?w=800",
+                  fallback: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
+                },
+                {
+                  domain: "syntech.co.ke",
+                  name: "Syntech Solutions",
+                  desc: "Our own platform — security & IT",
+                  tags: "Next.js • Store",
+                  shot: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fsyntech.co.ke?w=800",
+                  fallback: IMAGES.hero.server,
+                },
+              ].map((site) => (
+                <a
+                  key={site.domain}
+                  href={`https://${site.domain}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group rounded-2xl border-2 border-zinc-100 hover:border-[#0038A0]/30 overflow-hidden bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                >
+                  <div className="relative h-44 bg-zinc-50 overflow-hidden">
+                    <ProofImage
+                      src={site.shot}
+                      fallback={site.fallback}
+                      alt={`${site.name} — ${site.domain}`}
+                      className="h-full w-full object-cover object-top group-hover:scale-105 transition duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition" />
+                    <Badge className="absolute top-2 left-2 bg-white text-zinc-900 font-bold rounded-full text-[10px] shadow">LIVE</Badge>
+                    <span className="absolute bottom-2 right-2 h-7 w-7 rounded-full bg-[#0038A0] text-white grid place-items-center shadow opacity-90 group-hover:opacity-100">
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
+                  <div className="p-4 flex flex-col flex-1">
+                    <h4 className="font-black text-sm leading-tight group-hover:text-[#0038A0] transition flex items-center gap-1.5">
+                      {site.name} <ExternalLink className="h-3 w-3 text-zinc-400 group-hover:text-[#0038A0]" />
+                    </h4>
+                    <p className="text-xs font-mono text-[#0038A0] font-medium mt-0.5">{site.domain}</p>
+                    <p className="text-xs text-zinc-500 mt-1 line-clamp-2">{site.desc}</p>
+                    <p className="text-[11px] tracking-wide text-zinc-400 mt-2 font-medium">{site.tags}</p>
+                    <div className="mt-3">
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-zinc-900 group-hover:text-[#0038A0]">Visit site <span className="group-hover:translate-x-0.5 transition">→</span></span>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/quote"><Button className="rounded-full">Get Your Website Like This</Button></Link>
+              <Link href={`https://wa.me/${SITE.whatsapp}?text=Hi%20Syntech!%20I%20saw%20your%20proof%20of%20work%20(kimsafety,%20dynatec,%20safetypro,%20syntech)%20and%20want%20a%20website%20quote`} target="_blank"><Button variant="outline" className="rounded-full">WhatsApp Us</Button></Link>
+              <span className="text-xs text-zinc-500 self-center">All sites • Mobile-first • SEO • M-Pesa ready</span>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* What's Included + Pricing */}
       <div className="grid md:grid-cols-2 gap-6 mt-6">

@@ -8,7 +8,7 @@ import { ProductCard } from "@/components/product-card";
 import { IMAGES } from "@/lib/images";
 import { MOCK_PRODUCTS } from "@/lib/mock-products";
 import { ModernHeroSection } from "@/components/modern-hero-section";
-import { Phone, ShieldCheck, Clock, Award, ArrowRight, Building2, Home, Hotel, Landmark, GraduationCap, Stethoscope } from "lucide-react";
+import { Phone, ShieldCheck, Clock, Award, ArrowRight, Building2, Home, Hotel, Landmark, GraduationCap, Stethoscope, Globe, Palette, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -107,6 +107,105 @@ export default async function HomePage() {
             </CardContent>
           </Card>
         </div>
+      </section>
+
+      {/* Digital Creative — Website, Graphic & AI [ABOVE Shop Security] */}
+      <section className="container mx-auto px-4 py-10 md:py-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <Badge className="bg-[#F00000] text-white border-0 px-3 py-1 text-xs font-black tracking-widest rounded-full">DIGITAL CREATIVE STUDIO</Badge>
+              <Badge variant="outline" className="hidden sm:inline-flex rounded-full border-[#0038A0]/20 text-[#0038A0] font-semibold">Web • Graphic • AI</Badge>
+            </div>
+            <h2 className="text-2xl md:text-[28px] font-black tracking-tight leading-tight">Websites. Graphics. <span className="text-[#0038A0]">AI Power.</span></h2>
+            <p className="text-zinc-500 text-sm md:text-base mt-1">Beyond security — we build your digital presence. Modern, fast, and conversion-focused.</p>
+          </div>
+          <Link href="/quote" className="hidden md:inline-flex"><Button variant="outline" className="rounded-full border-[#0038A0] text-[#0038A0] hover:bg-[#0038A0] hover:text-white">Start a Project <ArrowRight className="h-4 w-4" /></Button></Link>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {/* Website Design */}
+          <Card className="overflow-hidden rounded-[20px] border-2 hover:border-[#0038A0]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+            <div className="h-44 relative overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Website Design" className="h-full w-full object-cover group-hover:scale-105 transition duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+              <Badge className="absolute top-3 left-3 bg-white text-zinc-900 font-bold rounded-full shadow">Website Design</Badge>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 text-white text-xs">
+                <span className="h-7 w-7 rounded-full bg-white/20 backdrop-blur grid place-items-center"><Globe className="h-3.5 w-3.5" /></span>
+                <span className="font-medium">Next.js • WordPress • E-commerce</span>
+              </div>
+            </div>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg leading-tight flex items-center gap-2"><Globe className="h-5 w-5 text-[#0038A0]" /> High-Converting Websites</CardTitle>
+              <p className="text-sm text-zinc-600 leading-relaxed">Business, portfolio & shop sites that load in &lt;2s, rank on Google & turn visitors into customers.</p>
+            </CardHeader>
+            <CardContent className="pt-0 flex flex-col flex-1">
+              <ul className="text-sm text-zinc-600 space-y-1.5 mb-4">
+                <li className="flex gap-2"><span className="text-[#0038A0]">✓</span> Mobile-first • SEO ready • M-Pesa checkout</li>
+                <li className="flex gap-2"><span className="text-[#0038A0]">✓</span> From <span className="font-bold text-zinc-900">KES 35,000</span> — 7 days delivery</li>
+              </ul>
+              <div className="mt-auto flex gap-2">
+                <Link href="/services/website-design" className="flex-1"><Button className="w-full rounded-full">View Work</Button></Link>
+                <Link href="/quote"><Button variant="outline" className="rounded-full">Quote</Button></Link>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Graphic Design */}
+          <Card className="overflow-hidden rounded-[20px] border-2 hover:border-[#F00000]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+            <div className="h-44 relative overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80" alt="Graphic Design" className="h-full w-full object-cover group-hover:scale-105 transition duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+              <Badge className="absolute top-3 left-3 bg-[#F00000] text-white font-bold rounded-full shadow border-0">Graphic Design</Badge>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 text-white text-xs">
+                <span className="h-7 w-7 rounded-full bg-white/20 backdrop-blur grid place-items-center"><Palette className="h-3.5 w-3.5" /></span>
+                <span className="font-medium">Brand • Print • Social</span>
+              </div>
+            </div>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg leading-tight flex items-center gap-2"><Palette className="h-5 w-5 text-[#F00000]" /> Brand & Visual Identity</CardTitle>
+              <p className="text-sm text-zinc-600 leading-relaxed">Logos, brand guides, posters, packaging & social kits that make you unforgettable.</p>
+            </CardHeader>
+            <CardContent className="pt-0 flex flex-col flex-1">
+              <ul className="text-sm text-zinc-600 space-y-1.5 mb-4">
+                <li className="flex gap-2"><span className="text-[#F00000]">✓</span> Logo, business cards, flyers, banners</li>
+                <li className="flex gap-2"><span className="text-[#F00000]">✓</span> From <span className="font-bold text-zinc-900">KES 5,000</span> — 48hr turnaround</li>
+              </ul>
+              <div className="mt-auto flex gap-2">
+                <Link href="/services/graphic-design" className="flex-1"><Button variant="secondary" className="w-full rounded-full bg-zinc-900 hover:bg-black text-white">See Portfolio</Button></Link>
+                <Link href="/quote"><Button variant="outline" className="rounded-full">Quote</Button></Link>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* AI Solutions */}
+          <Card className="overflow-hidden rounded-[20px] border-2 hover:border-[#0038A0]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col bg-gradient-to-br from-white to-[#F5F7FA]">
+            <div className="h-44 relative overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80" alt="AI Solutions" className="h-full w-full object-cover group-hover:scale-105 transition duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#002070]/80 via-[#002070]/20 to-transparent" />
+              <Badge className="absolute top-3 left-3 bg-[#0038A0] text-white font-bold rounded-full shadow border-0">AI Solutions</Badge>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 text-white text-xs">
+                <span className="h-7 w-7 rounded-full bg-white/20 backdrop-blur grid place-items-center"><Sparkles className="h-3.5 w-3.5" /></span>
+                <span className="font-medium">Chatbots • Automation • Analytics</span>
+              </div>
+            </div>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg leading-tight flex items-center gap-2"><Sparkles className="h-5 w-5 text-[#0038A0]" /> AI for Business</CardTitle>
+              <p className="text-sm text-zinc-600 leading-relaxed">Automate support, generate content & get insights — AI tailored for Kenyan businesses.</p>
+            </CardHeader>
+            <CardContent className="pt-0 flex flex-col flex-1">
+              <ul className="text-sm text-zinc-600 space-y-1.5 mb-4">
+                <li className="flex gap-2"><span className="text-[#0038A0]">✓</span> WhatsApp bots, lead qualification</li>
+                <li className="flex gap-2"><span className="text-[#0038A0]">✓</span> From <span className="font-bold text-zinc-900">KES 15,000</span>/mo — demo in 24hrs</li>
+              </ul>
+              <div className="mt-auto flex gap-2">
+                <Link href="/services/ai-solutions" className="flex-1"><Button className="w-full rounded-full bg-[#0038A0] hover:bg-[#002070]">Explore AI</Button></Link>
+                <Link href="/quote"><Button variant="outline" className="rounded-full">Quote</Button></Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+        <div className="text-center mt-6 md:hidden"><Link href="/quote"><Button variant="outline" className="w-full rounded-full">Start a Digital Project</Button></Link></div>
       </section>
 
       {/* Featured Products — with brand accent header */}
