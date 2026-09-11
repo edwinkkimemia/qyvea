@@ -580,12 +580,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   fallback: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
                 },
                 {
-                  domain: "syntech.co.ke",
-                  name: "Syntech Solutions",
-                  desc: "Our own platform — security & IT",
-                  tags: "Next.js • Store",
-                  shot: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fsyntech.co.ke?w=800",
-                  fallback: IMAGES.hero.server,
+                  domain: "superweb.co.ke",
+                  name: "SuperWeb",
+                  desc: "Web design agency — portfolio & leads",
+                  tags: "Agency • Portfolio",
+                  shot: "https://s0.wp.com/mshots/v1/https%3A%2F%2Fsuperweb.co.ke?w=800",
+                  fallback: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
                 },
               ].map((site) => (
                 <a
@@ -624,7 +624,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/quote"><Button className="rounded-full">Get Your Website Like This</Button></Link>
-              <Link href={`https://wa.me/${SITE.whatsapp}?text=Hi%20Syntech!%20I%20saw%20your%20proof%20of%20work%20(kimsafety,%20dynatec,%20safetypro,%20syntech)%20and%20want%20a%20website%20quote`} target="_blank"><Button variant="outline" className="rounded-full">WhatsApp Us</Button></Link>
+              <Link href={`https://wa.me/${SITE.whatsapp}?text=Hi%20Syntech!%20I%20saw%20your%20proof%20of%20work%20(kimsafety,%20dynatec,%20safetypro,%20superweb)%20and%20want%20a%20website%20quote`} target="_blank"><Button variant="outline" className="rounded-full">WhatsApp Us</Button></Link>
               <span className="text-xs text-zinc-500 self-center">All sites • Mobile-first • SEO • M-Pesa ready</span>
             </div>
           </CardContent>
